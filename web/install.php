@@ -1,5 +1,5 @@
 <?php
-$file = __DIR__ . '/config.sample.php';
+$file = __DIR__ . '/config.php';
 
 if(isset($_POST['submit'])) {
   extract($_POST, EXTR_OVERWRITE);
