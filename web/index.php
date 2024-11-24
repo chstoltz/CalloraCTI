@@ -8,4 +8,5 @@ include('auth.php');
 header('Location: anrufliste.php');
 
 include('footer.php');
+
 ?>
