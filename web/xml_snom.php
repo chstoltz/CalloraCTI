@@ -177,7 +177,7 @@ if(isset($_GET['action'])) {
             curl_exec($ch);
             curl_close($ch);
             fclose($fp);
-            $ffmpeg_command = '/usr/bin/ffmpeg -i '.$cfg['cnf']['path'].'/web/tmp/'.$filename.'.tmp -acodec pcm_alaw -ar 8000 -ac 1 '.$cfg['cnf']['path'].'/web/tmp/'.$filename.'.wav';
+            $ffmpeg_command = '/usr/bin/ffmpeg -i '.$cfg['cnf']['path'].'/web/tmp/'.$filename.'.tmp -acodec pcm_s16le -ar 8000 -ac 1 '.$cfg['cnf']['path'].'/web/tmp/'.$filename.'.wav';
             shell_exec($ffmpeg_command);
             echo '<SnomIPPhoneMenu speedselect="enter" scrollbar="no">';
             echo '<MenuItem name="Nachricht abspielen ('.$message->Number.')"><URL>phone://mb_nop#action_ifc:pui=play_wav,url=http://'.$cfg['cnf']['fqdn'].'/web/tmp/'.$filename.'.wav</URL></MenuItem>';
@@ -334,7 +334,7 @@ if(isset($_GET['action'])) {
       $query = mysqli_query($db_conn,"SELECT * FROM usr_tuerklingel");
       $array = mysqli_fetch_array($query);
       $wc_query = mysqli_query($db_conn,"SELECT model FROM usr_telefon WHERE displayname = '$nst'");
-      $wc_array = mysqli_Query($wc_query);
+      $wc_array = mysqli_fetch_array($wc_query);
       $model = $wc_array['model'];
       if(($model == 'D865') || ($model == 'D862')) {
         $wc_url = $array['wc_url_l'];
