@@ -196,6 +196,7 @@ if(mysqli_num_rows($query) != 0) {
         $config .= "$key type: xml\n";
         $config .= "$key value: $protocol://{$cfg['cnf']['fqdn']}/web/xml_mitel.php?nst=\$\$DISPLAYNAME\$\$&action=voicemail\n";
         $config .= "$key label: $label\n";
+        break;
       case 'telefonbuch':
 	      $config .= "$key type: xml\n";
 	      $config .= "$key value: $protocol://{$cfg['cnf']['fqdn']}/web/xml_mitel.php?nst=\$\$DISPLAYNAME\$\$&action=telefonbuch\n";
