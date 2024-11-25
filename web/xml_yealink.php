@@ -210,11 +210,8 @@ if(isset($_GET['action'])) {
           foreach($xml->Message as $message) {
             if($message->New == 1) { $icon_in = 1;} else { $icon_in = 2; }
             //echo '<MenuItem icon="'.$icon_in.'"><Prompt>'.$message->Number.', '.$message->Date.'</Prompt><URI>SoftKey:Dial2</URI><Dial>'.$message->Number.'</Dial><Selection>'.$message->Index.'</Selection></MenuItem>';
-            if(isset($_GET['sipdect'])) {
-              echo '<MenuItem icon="'.$icon_in.'"><Prompt>'.$message->Number.', '.$message->Date.'</Prompt><URI>Dial:'.$message->Number.'</URI><Dial>'.$message->Number.'</Dial><Selection>'.$message->Index.'</Selection></MenuItem>';
-            } else {
-              echo '<MenuItem icon="'.$icon_in.'"><Prompt>'.$message->Number.', '.$message->Date.'</Prompt><URI>https://'.$cfg['cnf']['fqdn'].'/web/xml_yealink.php?mac=$mac&amp;action=voicemail</URI><Dial>'.$message->Number.'</Dial><Selection>'.$message->Index.'</Selection></MenuItem>';
-            }
+            echo '<MenuItem icon="'.$icon_in.'"><Prompt>'.$message->Number.', '.$message->Date.'</Prompt><URI>https://'.$cfg['cnf']['fqdn'].'/web/xml_yealink.php?mac=$mac&amp;action=voicemail</URI><Dial>'.$message->Number.'</Dial><Selection>'.$message->Index.'</Selection></MenuItem>';
+            
 	        }
           echo '<IconList><Icon index="1">Icon:Envelope</Icon>';
           if(isset($_GET['sipdect'])) {
@@ -224,7 +221,7 @@ if(isset($_GET['action'])) {
           }
           echo '<SoftKey index="1"><Label>Abspielen</Label><URI>https://'.$cfg['cnf']['fqdn'].'/web/xml_yealink.php?mac=$mac&amp;action=voicemail</URI></SoftKey>
                 <SoftKey index="2"><Label>Löschen</Label><URI>https://'.$cfg['cnf']['fqdn'].'/web/xml_yealink.php?mac=$mac&amp;action=voicemail&amp;del=1</URI></SoftKey>
-                <SoftKey index="3"><Label>Anrufen</Label><URI>Dial:'.$message->Number.'</URI></SoftKey>';
+                <SoftKey index="3"><Label>Anrufen</Label><URI>SoftKey:Dial</URI></SoftKey>';
 	      } else {
           echo '<MenuItem><Prompt>keine Nachrichten</Prompt><URI>Sofkey:Exit</URI></MenuItem>';
 	      }
