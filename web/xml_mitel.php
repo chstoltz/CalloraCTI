@@ -221,7 +221,7 @@ if(isset($_GET['action'])) {
           }
           echo '<SoftKey index="1"><Label>Abspielen</Label><URI>https://'.$cfg['cnf']['fqdn'].'/web/xml_mitel.php?nst=$$DISPLAYNAME$$&amp;action=voicemail</URI></SoftKey>
                 <SoftKey index="2"><Label>Löschen</Label><URI>https://'.$cfg['cnf']['fqdn'].'/web/xml_mitel.php?nst=$$DISPLAYNAME$$&amp;action=voicemail&amp;del=1</URI></SoftKey>
-                <SoftKey index="3"><Label>Anrufen</Label><URI>Dial:'.$message->Number.'</URI></SoftKey>';
+                <SoftKey index="3"><Label>Anrufen</Label><URI>SoftKey:Dial2</URI></SoftKey>';
 	      } else {
           echo '<MenuItem><Prompt>keine Nachrichten</Prompt><URI>Sofkey:Exit</URI></MenuItem>';
 	      }
