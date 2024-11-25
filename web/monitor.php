@@ -52,7 +52,7 @@
       echo '<a href="#" onclick="hangup('.$nst.')"><i class="fa-solid '.$icon.' fa-bounce" style="color: #ffd43b;"></i></a>&nbsp;&nbsp;<b>wählt: ' .$remotenumber.'</b>';
       break;
     case 'connected':
-      echo '<a href="#" onclick="hangup('.$nst.')"><i class="fa-solid '.$icon2.' fa-beat" style="color: #ff0000;"></i></a>&nbsp;&nbsp;<b>620: Gespräch: ' .$remotenumber.'&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-regular fa-clock fa-beat"></i>&nbsp;&nbsp;'.gmdate("i:s", $clock).'</b></a>';
+      echo '<a href="#" onclick="hangup('.$nst.')"><i class="fa-solid '.$icon2.' fa-beat" style="color: #ff0000;"></i></a>&nbsp;&nbsp;<b>620: Gespräch: ' .$remotenumber.'&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-regular fa-clock fa-beat"></i>&nbsp;&nbsp;'.gmdate("i:s", @$clock).'</b></a>';
       break;
     case 'offhook':
       echo '<a href="#" onclick="hangup('.$nst.')"><i class="fa-solid '.$icon2.' fa-beat" style="color: #ff0000;"></i></a>&nbsp;&nbsp;<b>620: Hörer abgehoben</b>';
