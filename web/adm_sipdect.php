@@ -168,6 +168,7 @@ if(isset($_POST['submitedit'])) {
         <div class="w3-bar-item" style="width:150px">Name</div>
         <div class="w3-bar-item" style="width:100px">Hardware</div>
         <div class="w3-bar-item" style="width:180px">MAC Adresse</div>
+        <div class="w3-bar-item" style="width:50px"><i class="fa-solid fa-floppy-disk" title="Software Version"></i></div>
         <div class="w3-bar-item" style="width:50px"><i class="fa-solid fa-tower-cell" title="DECT Status"></i></div>
         <div class="w3-bar-item" style="width:50px"><i class="fa-solid fa-wifi" title="WLAN Status"></i></div>
         <div class="w3-bar-item" style="width:50px"><i class="fa-solid fa-magnifying-glass" title="Paging-Bereich"></i></div>
@@ -193,6 +194,7 @@ if(isset($_POST['submitedit'])) {
           <div class="w3-bar-item" style="width:150px"><input class="w3-input w3-border" name="name" value="<?php echo $rfp_att->name; ?>"></div>
           <div class="w3-bar-item" style="width:100px"><?php echo $rfp_att->hwType; ?></div>
           <div class="w3-bar-item" style="width:180px"><?php echo $rfp_att->ethAddr; ?></div>
+          <div class="w3-bar-item" style="width:50px"><i class="fa-solid fa-circle-info" title="<?php echo $rfp_att->swVersion; ?>"></i></div>
           <div class="w3-bar-item" style="width:50px"><?php if($rfp_att->dectOn == 'true') { echo '<i class="fa-solid fa-check" style="color: #63E6BE;"></i>'; } else { echo '<i class="fa-solid fa-xmark" style="color: #e01b24;"></i>'; } ?></div>
           <div class="w3-bar-item" style="width:50px"><?php if($rfp_att->wlanOn == 'true') { echo '<i class="fa-solid fa-check" style="color: #63E6BE;"></i>'; } else { echo '<i class="fa-solid fa-xmark" style="color: #e01b24;"></i>'; } ?></div>
           <div class="w3-bar-item" style="width:50px"><?php echo $rfp_att->pagingArea; ?></div>
@@ -212,6 +214,7 @@ if(isset($_POST['submitedit'])) {
         <div class="w3-bar-item" style="width:150px"><?php echo $rfp_att->name; ?></div>
         <div class="w3-bar-item" style="width:100px"><?php echo $rfp_att->hwType; ?></div>
         <div class="w3-bar-item" style="width:180px"><?php echo $rfp_att->ethAddr; ?></div>
+        <div class="w3-bar-item" style="width:50px"><i class="fa-solid fa-circle-info" title="<?php echo $rfp_att->swVersion; ?>"></i></div>
         <div class="w3-bar-item" style="width:50px"><?php if($rfp_att->dectOn == 'true') { echo '<i class="fa-solid fa-check" style="color: #63E6BE;"></i>'; } else { echo '<i class="fa-solid fa-xmark" style="color: #e01b24;"></i>'; } ?></div>
         <div class="w3-bar-item" style="width:50px"><?php if($rfp_att->wlanOn == 'true') { echo '<i class="fa-solid fa-check" style="color: #63E6BE;"></i>'; } else { echo '<i class="fa-solid fa-xmark" style="color: #e01b24;"></i>'; } ?></div>
         <div class="w3-bar-item" style="width:50px"><?php echo $rfp_att->pagingArea; ?></div>
