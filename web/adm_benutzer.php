@@ -131,7 +131,7 @@ if (isset($_POST['submitedit'])) {
   $query = mysqli_query($db_conn,"SELECT * FROM adm_benutzer JOIN usr_einstellungen WHERE adm_benutzer.id = usr_einstellungen.user_id ORDER BY adm_benutzer.nst ASC");
   while ($row = mysqli_fetch_array($query)) {
     extract($row, EXTR_OVERWRITE);
-    if($id == @$edit_id) {
+    if($user_id == @$edit_id) {
       
       //$fb_deflection = json_decode(us('fb_deflection'), true);
       //$fb_ports = json_decode(us('fb_ports'), true);
@@ -142,18 +142,70 @@ if (isset($_POST['submitedit'])) {
               <div class="w3-bar-item" style="width:200px"><input class="w3-input w3-border" type="password" name="password"></div>
               <div class="w3-bar-item" style="width:200px"><input class="w3-input w3-border" type="text" name="email" value="'.$email.'"></div>
               <div class="w3-bar-item" style="width:200px">
-                <select class="w3-select" name="fb_ab">
-                  <option value="">keiner</option>';
+                <select class="w3-select w3-padding" name="fb_ab">
+                  <option value="99">keiner</option>';
                   foreach($xml_tam->Item as $item) {
 	                  if($item->Display == 1) {
-	                    if($item->Index == us('fb_ab')) { $selected = 'selected'; } else { $selected = ''; }
+	                    if($item->Index == @$fb_ab) { $selected = 'selected'; } else { $selected = ''; }
   	                  echo '<option value="'.$item->Index.'" '.$selected.'>'.$item->Name.'</option>';
 	                  }
                   }
         echo '</select>
               </div>
+              <div class="w3-bar-item" style="width:200px">
+                <select class="w3-select w3-padding" name="fb_book">
+                  <option value="99">keins</option>';
+                    foreach($array_book as $book) {
+                      if($fb_book == $book) { $fb_book_select = 'selected'; }
+                      $bookname = $x_contact->GetPhonebook(new SoapParam($book, 'NewPhonebookID'));
+                      $bookname = $bookname['NewPhonebookName'];
+	                    echo '<option value="'.$book.'" '.@$fb_book_select.'>'.$bookname.'</option>';
+                    }
+        echo '</select>
+              </div>
+              <div class="w3-bar-item" style="width:200px">
+                <select class="w3-select w3-padding" name="fb_deflection">';
+                if ($fb_ports == '["-1","20","21","22","23","24","25","26","27","28","29","10","11","12","13","14","15"]' ) {
+                  $alle = 'selected';
+                } else {
+                  $eigene = 'selected';
+                }
+            echo '<option value="1" '.@$alle.'>alle & verpasst</option>
+                  <option value="2" '.@$eigene.'>eigene & verpasst</option>
+                </select>
+              </div>
+              <div class="w3-bar-item" style="width:250px">
+                <select class="w3-select w3-padding" name="fb_deflection">
+                  <option value="99">keine</option>';
+                    foreach($xml_def->Item as $item) {
+                      if($fb_deflection == $item->DeflectionId) { $fb_deflection_selected = 'selected'; }
+                      if($item->Type == 'toVoIP') {
+                        switch($item->Mode) {
+                          case 'eParallelCall':
+                            $type = '[PR]';
+                            break;
+                          case 'eShortDelayed':
+                            $type = '[20]';
+                            break;
+                          case 'eDelayedOrBusy':
+                            $type = '[Busy]';
+                            break;
+                          case 'eImmediately':
+                            $type = '[RUL]';
+                            break;
+                          case 'eLongDelayed':
+                            $type = '[40]';
+                            break;
+                        }
+                    echo '<option value="'.$item->DeflectionId.'" '.@$fb_deflection_selected.'>'.$item->Number.' => '.$item->DeflectionToNumber.' '.$type.'</option>';
+                      }
+                      unset($fb_deflection_selected);
+                    }
+ 
+          echo '</select>
+              </div>
               <div class="w3-bar-item" style="width:50px">
-                <input type="hidden" name="submitedit" value="'.$id.'" />
+                <input type="hidden" name="submitedit" value="'.$user_id.'" />
                 
                 <button type="submit"><i class="fa-solid fa-user-check"></i></button>
               </div>
@@ -259,7 +311,6 @@ if (isset($_POST['submitedit'])) {
     </div>
     <div class="w3-bar-item w3-padding" style="width:200px">
       <select class="w3-select w3-padding" name="fb_ports">
-        <option value="99">keine</option>
         <option value="1">alle & verpasst</option>
         <option value="2">eigene & verpasst</option>
       </select>
