@@ -169,7 +169,12 @@ if(mysqli_num_rows($query) != 0) {
 $query = mysqli_query($db_conn,"SELECT * FROM tasten WHERE nst = '$nst'");
 if(mysqli_num_rows($query) != 0) {
   while($row = mysqli_fetch_array($query)) {
-    $key = $row['taste'];
+    if (str_starts_with($row['taste'], 'exp')) {
+      $key = $row['taste'];
+      $key = 'expmod1 key'.substr($key, -1);
+    } else {
+      $key = $row['taste'];
+    }
     $value = $row['ziel'];
     $type = $row['type'];
     $label = $row['label'];

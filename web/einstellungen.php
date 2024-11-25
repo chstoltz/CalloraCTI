@@ -26,7 +26,7 @@ $tab_softkeys = 'style="display:none"';
 $link_softkeys = '';
 $tab_telefon = 'style="display:none"';
 $link_telefon = '';
-$tab_exp = 'style="display:none"';
+$tab_expkeys = 'style="display:none"';
 $link_exp = '';
 echo '<script>
         function openTab(evt, tabName) {
@@ -170,7 +170,7 @@ if(@$sip_array['type'] == TRUE) {
       if(mysqli_num_rows($tquery) == 1) {
         $tarray = mysqli_fetch_array($tquery);
         $type = $tarray['type'];
-        $type = 'key_'.$type;
+        $type = 'tkey_'.$type;
         $$type[$c] = 'selected';
         $label = $tarray['label'];
         $value = $tarray['ziel'];
@@ -181,17 +181,17 @@ echo '<button onclick="myFunction(\'topsoftkey'.$c.'\')" class="w3-button w3-blo
 	        <label>Tastentyp:</label><br />
 	        <select class="w3-select w3-padding" name="type" style="width:300px">
             <option value="leer">leer</option>
-            <option value="blf" '.@$key_blf[$c].'>BLF</option>
-            <option value="speeddial" '.@$key_speeddial[$c].'>Kurzwahl</option>
-            <option value="line" '.@$key_line[$c].'>Leitung</option>
-	          <option value="mobilelink" '.@$key_mobilelink[$c].'>MobileLink</option>
-	          <option value="telefonbuch" '.@$key_telefonbuch[$c].'>Telefonbuch</option>
-            <option value="anrufliste" '.@$key_anrufliste[$c].'>Anrufliste</option>
-            <option value="voicemail" '.@$key_voicemail[$c].'>Anrufbeantworter</option>
-	          <option value="rvt" '.@$key_rvt[$c].'>Ruhe vor dem Telefon</option>
-	          <option value="kamera" '.@$key_kamera[$c].'>Kamera</option>
-	          <option value="tueroeffner" '.@$key_tueroeffner[$c].'>Türöffner</option>
-            <option value="services" '.@$key_services[$c].'>Services</option>
+            <option value="blf" '.@$tkey_blf[$c].'>BLF</option>
+            <option value="speeddial" '.@$tkey_speeddial[$c].'>Kurzwahl</option>
+            <option value="line" '.@$tkey_line[$c].'>Leitung</option>
+	          <option value="mobilelink" '.@$tkey_mobilelink[$c].'>MobileLink</option>
+	          <option value="telefonbuch" '.@$tkey_telefonbuch[$c].'>Telefonbuch</option>
+            <option value="anrufliste" '.@$tkey_anrufliste[$c].'>Anrufliste</option>
+            <option value="voicemail" '.@$tkey_voicemail[$c].'>Anrufbeantworter</option>
+	          <option value="rvt" '.@$tkey_rvt[$c].'>Ruhe vor dem Telefon</option>
+	          <option value="kamera" '.@$tkey_kamera[$c].'>Kamera</option>
+	          <option value="tueroeffner" '.@$tkey_tueroeffner[$c].'>Türöffner</option>
+            <option value="services" '.@$tkey_services[$c].'>Services</option>
           </select><br />
 	        <label>Beschriftung:</label>
           <input class="w3-input w3-border" type="text" name="label" value="'.@$label.'" style="width:300px">
@@ -216,10 +216,10 @@ echo '</div>';
       if(mysqli_num_rows($squery) == 1) {
         $sarray = mysqli_fetch_array($squery);
         $type = $sarray['type'];
-        $type = 'key_'.$type;
+        $type = 'skey_'.$type;
         $$type[$s] = 'selected';
-        $label[$s] = $sarray['label'];
-        $value[$s] = $sarray['ziel'];
+        $label = $sarray['label'];
+        $value = $sarray['ziel'];
       }
 echo '<button onclick="myFunction(\'softkey'.$s.'\')" class="w3-button w3-block w3-left-align w3-light-grey w3-border" style="width:400px">SoftKey '.$s.'</button>
       <div id="softkey'.$s.'" class="w3-container w3-hide">
@@ -227,22 +227,22 @@ echo '<button onclick="myFunction(\'softkey'.$s.'\')" class="w3-button w3-block 
 	        <label>Tastentyp:</label><br />
 	        <select class="w3-select w3-padding" name="type" style="width:300px">
             <option value="leer">leer</option>
-            <option value="blf" '.@$key_blf[$s].'>BLF</option>
-            <option value="speeddial" '.@$key_speeddial[$s].'>Kurzwahl</option>
-            <option value="line" '.@$key_line[$s].'>Leitung</option>
-	          <option value="mobilelink" '.@$key_mobilelink[$s].'>MobilLink</option>
-            <option value="voicemail" '.@$key_voicemail[$s].'>Anrufbeantworter</option>
-	          <option value="telefonbuch" '.@$key_telefonbuch[$s].'>Telefonbuch</option>
-            <option value="anrufliste" '.@$key_anrufliste[$s].'>Anrufliste</option>
-	          <option value="rvt" '.@$key_rvt[$s].'>Ruhe vor dem Telefon</option>
-	          <option value="kamera" '.@$key_kamera[$s].'>Kamera</option>
-	          <option value="tueroeffner" '.@$key_tueroeffner[$s].'>Türöffner</option>
-            <option value="services" '.@$key_services[$s].'>Services</option>
+            <option value="blf" '.@$skey_blf[$s].'>BLF</option>
+            <option value="speeddial" '.@$skey_speeddial[$s].'>Kurzwahl</option>
+            <option value="line" '.@$skey_line[$s].'>Leitung</option>
+	          <option value="mobilelink" '.@$skey_mobilelink[$s].'>MobilLink</option>
+            <option value="voicemail" '.@$skey_voicemail[$s].'>Anrufbeantworter</option>
+	          <option value="telefonbuch" '.@$skey_telefonbuch[$s].'>Telefonbuch</option>
+            <option value="anrufliste" '.@$skey_anrufliste[$s].'>Anrufliste</option>
+	          <option value="rvt" '.@$skey_rvt[$s].'>Ruhe vor dem Telefon</option>
+	          <option value="kamera" '.@$skey_kamera[$s].'>Kamera</option>
+	          <option value="tueroeffner" '.@$skey_tueroeffner[$s].'>Türöffner</option>
+            <option value="services" '.@$skey_services[$s].'>Services</option>
           </select><br />
 	        <label>Beschriftung:</label>
-          <input class="w3-input w3-border" type="text" name="label" value="'.@$label[$s].'" style="width:300px">
+          <input class="w3-input w3-border" type="text" name="label" value="'.@$label.'" style="width:300px">
 	        <label>Inhalt:</label>
-          <input class="w3-input w3-border" type="text" name="value" value="'.@$value[$s].'" style="width:300px">
+          <input class="w3-input w3-border" type="text" name="value" value="'.@$value.'" style="width:300px">
 	        <input type="hidden" name="key" value="softkey'.$s.'">
           <input type="hidden" name="keytype" value="softkeys">
 	        <input type="hidden" name="settings" value="keys">
@@ -255,7 +255,7 @@ echo '</div>';
   }
 }
 if((isset($exp_module)) AND ($exp_module != 0)) {
-  echo '<div id="Tastenmodul" class="w3-container tab w3-animate-opacity" '.$tab_exp.'><p>&nbsp;</p>';
+  echo '<div id="Tastenmodul" class="w3-container tab w3-animate-opacity" '.$tab_expkeys.'><p>&nbsp;</p>';
   if($expkeys == 28) {
     echo '<div class="w3-container" style="width:75%">
             <div class="w3-row w3-third">';
@@ -265,10 +265,10 @@ if((isset($exp_module)) AND ($exp_module != 0)) {
     if(mysqli_num_rows($equery) == 1) {
       $earray = mysqli_fetch_array($equery);
       $type = $earray['type'];
-      $type = 'key_'.$type;
+      $type = 'ekey_'.$type;
       $$type[$e] = 'selected';
-      $label[$e] = $earray['label'];
-      $value[$e] = $earray['ziel'];
+      $label = $earray['label'];
+      $value = $earray['ziel'];
     }
   echo '<button onclick="myFunction(\'expkey'.$e.'\')" class="w3-button w3-block w3-left-align w3-light-grey w3-border" style="width:400px">ExpKey '.$e.'</button>
         <div id="expkey'.$e.'" class="w3-container w3-hide">
@@ -276,22 +276,22 @@ if((isset($exp_module)) AND ($exp_module != 0)) {
             <label>Tastentyp:</label><br />
 	          <select class="w3-select w3-padding" name="type" style="width:300px">
               <option value="leer">leer</option>
-              <option value="blf" '.@$key_blf[$e].'>BLF</option>
-              <option value="speeddial" '.@$key_speeddial[$e].'>Kurzwahl</option>
-              <option value="line" '.@$key_line[$e].'>Leitung</option>
-	            <option value="mobilelink" '.@$key_mobilelink[$e].'>MobileLink</option>
-              <option value="voicemail" '.@$key_voicemail[$e].'>Anrufbeantworter</option>
-	            <option value="telefonbuch" '.@$key_telefonbuch[$e].'>Telefonbuch</option>
-              <option value="anrufliste" '.@$key_anrufliste[$e].'>Anrufliste</option>
-	            <option value="rvt" '.@$key_rvt[$e].'>Ruhe vor dem Telefon</option>
-	            <option value="kamera" '.@$key_kamera[$e].'>Kamera</option>
-	            <option value="tueroeffner" '.@$key_tueroeffner[$e].'>Türöffner</option>
-              <option value="services" '.@$key_services[$e].'>Services</option>
+              <option value="blf" '.@$ekey_blf[$e].'>BLF</option>
+              <option value="speeddial" '.@$ekey_speeddial[$e].'>Kurzwahl</option>
+              <option value="line" '.@$ekey_line[$e].'>Leitung</option>
+	            <option value="mobilelink" '.@$ekey_mobilelink[$e].'>MobileLink</option>
+              <option value="voicemail" '.@$ekey_voicemail[$e].'>Anrufbeantworter</option>
+	            <option value="telefonbuch" '.@$ekey_telefonbuch[$e].'>Telefonbuch</option>
+              <option value="anrufliste" '.@$ekey_anrufliste[$e].'>Anrufliste</option>
+	            <option value="rvt" '.@$ekey_rvt[$e].'>Ruhe vor dem Telefon</option>
+	            <option value="kamera" '.@$ekey_kamera[$e].'>Kamera</option>
+	            <option value="tueroeffner" '.@$ekey_tueroeffner[$e].'>Türöffner</option>
+              <option value="services" '.@$ekey_services[$e].'>Services</option>
             </select><br />
 	          <label>Beschriftung:</label>
-            <input class="w3-input w3-border" type="text" name="label" value="'.$label[$e].'" style="width:300px">
+            <input class="w3-input w3-border" type="text" name="label" value="'.@$label.'" style="width:300px">
 	          <label>Inhalt:</label>
-            <input class="w3-input w3-border" type="text" name="value" value="'.$value[$e].'" style="width:300px">
+            <input class="w3-input w3-border" type="text" name="value" value="'.@$value.'" style="width:300px">
   	        <input type="hidden" name="key" value="expkey'.$e.'">
             <input type="hidden" name="keytype" value="expkeys">
 	          <input type="hidden" name="settings" value="keys">
