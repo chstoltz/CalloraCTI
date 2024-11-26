@@ -81,6 +81,15 @@ if(isset($_GET['addrfp'])) {
   $capturelist = axi($cfg['omm']['ip'],$cfg['omm']['user'],$cfg['omm']['pass'],$command);
   $capture = 1;
 }
+if(isset($_GET['led'])) {
+  $toggle = $_GET['led'];
+  if($toggle == 'on') {
+    $command = '<SetLedDimming enable="false" />';
+  } else {
+    $command = '<SetLedDimming enable="true" />';
+  }
+  axi($cfg['omm']['ip'],$cfg['omm']['user'],$cfg['omm']['pass'],$command);
+}
 if(isset($_POST['submitedit'])) {
   $rfpid = $_POST['submitedit'];
   $name = $_POST['name'];
@@ -138,6 +147,12 @@ if(isset($_POST['submitedit'])) {
       
       $park_xml = simplexml_load_string($park);
       $park_att = $park_xml->attributes();
+
+      $command = '<GetLedDimming />';
+      $led = axi($cfg['omm']['ip'],$cfg['omm']['user'],$cfg['omm']['pass'],$command);
+
+      $led_xml = simplexml_load_string($led);
+      $led_att = $led_xml->attributes();
       
     ?>
     <h5>OMM Daten:</h5>
@@ -145,6 +160,7 @@ if(isset($_POST['submitedit'])) {
     <ul class="w3-ul">
       <li class="w3-bar">
         <div class="w3-bar-item" style="width:300px">PARK</div>
+        <div class="w3-bar-item" style="width:50px">LED</div>
         <div class="w3-bar-item" style="width:130px">Mobilteile FW:</div>
         <div class="w3-bar-item" style="width:100px">600d</div>
         <div class="w3-bar-item" style="width:100px">6x2d/650c</div>
@@ -154,6 +170,7 @@ if(isset($_POST['submitedit'])) {
 
       <li class="w3-bar">
         <div class="w3-bar-item" style="width:300px"><?php echo $park_att->park; echo ' ('.$park_att->initialPARK.')'; if($park_att->park == '') { ?> <a class="w3-tag w3-blue" href="adm_sipdect?park=1">PARK anfordern</a><?php } ?></div>
+        <div class="w3-bar-item" style="width:50px"><?php if($led_att->enable == 'true') { echo '<a href="adm_sipdect.php?led=on"><i class="fa-regular fa-lightbulb" title="LED deaktiviert"></i></a>'; } else { echo '<a href="adm_sipdect.php?led=off"><i class="fa-solid fa-lightbulb" style="color: #FFD43B;" title="LED aktiviert"></i></a>'; } ?></div>
         <div class="w3-bar-item" style="width:130px"> </div>
         <div class="w3-bar-item" style="width:100px"><?php echo $att->minPPSwVersion1; ?></div>
         <div class="w3-bar-item" style="width:100px"><?php echo $att->minPPSwVersion2; ?></div>
