@@ -1,5 +1,6 @@
 <?php
 $file = __DIR__ . '/config.php';
+$prov = dirname(__DIR__).'/prov';
 
 if(isset($_POST['submit'])) {
   extract($_POST, EXTR_OVERWRITE);
@@ -15,7 +16,7 @@ if(isset($_POST['submit'])) {
   }
 }
 if(file_exists($file)) {
-  include('config.sample.php');
+  include('config.php');
   $configfile = 1;
   $connect = 1;
 }
@@ -29,16 +30,34 @@ include('adm_header.php');
 ?>
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
   <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="Anmelden">
-    <h2>MiFritz!CTI - Installationsassistent</h2>
+    <h2><b>Callora<span style="color:#b3b2b2;">C</span><span style="color:#878786;">T</span><span style="color:#23b0e6;">I</span></b> - Installationsassistent</h2>
     <br />
     <ul class="w3-ul">
       <li class="w3-bar">
         <div class="w3-bar-item" style="width:300px">
-          Serververzeichnis beschreibbar:
+          Root-Verzeichnis beschreibbar:<br />
+          (<?php echo __DIR__.'/'; ?>)
         </div>
         <div class="w3-bar-item">
           <?php 
             if(is_writeable(__DIR__)) {
+              echo '<i class="fa-solid fa-square-check" style="color: #63E6BE;"></i>';
+            } else {
+              echo '<i class="fa-solid fa-square-xmark" style="color: #ed333b;"></i>';
+              echo '</div><div class="w3-bar-item">Bitte Berechtigungen anpassen!';
+              exit;
+            }
+          ?>
+        </div>
+      </li>
+      <li class="w3-bar">
+        <div class="w3-bar-item" style="width:300px">
+          Provisionierungs-Verzeichnis beschreibbar:<br />
+          (<?php echo __DIR__.'/../prov/'; ?>)
+        </div>
+        <div class="w3-bar-item">
+          <?php 
+            if(is_writable(__DIR__.'/../prov')) {
               echo '<i class="fa-solid fa-square-check" style="color: #63E6BE;"></i>';
             } else {
               echo '<i class="fa-solid fa-square-xmark" style="color: #ed333b;"></i>';
@@ -92,6 +111,7 @@ include('adm_header.php');
             if(mysqli_num_rows($test) == 0) {
             $script = __DIR__.'/../sql/mysql.sql';
             $sqlScript = file($script);
+            $query = '';
             foreach ($sqlScript as $line)	{
               $startWith = substr(trim($line), 0 ,2);
               $endWith = substr(trim($line), -1 ,1);
@@ -105,6 +125,7 @@ include('adm_header.php');
               }
             }
             echo '<i class="fa-solid fa-square-check" style="color: #63E6BE;"></i>';
+            $settings = 1;
           } else {
             echo '<i class="fa-solid fa-square-check" style="color: #63E6BE;"></i>';
             $settings = 1;
@@ -113,7 +134,7 @@ include('adm_header.php');
         </div>
       </li>
       <?php } 
-      if($settings == 1) {      
+      if(@$settings == 1) {      
       ?>
       <li class="w3-bar">
         <div class="w3-bar-item">
@@ -136,7 +157,7 @@ include('adm_header.php');
   <p>Zugangsdaten:<br />
   Benutzername: <b>admin</b><br />
   Passwort: <b>admin</b></p>
-  <p>... weiter zu <a href="index.php">MiFritz!CTI</a> ...</p>
+  <p>... weiter zu <a href="index.php"><b>Callora<span style="color:#b3b2b2;">C</span><span style="color:#878786;">T</span><span style="color:#23b0e6;">I</span></b></a> ...</p>
   <?php } ?>
  </div>
 <?php 
