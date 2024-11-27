@@ -6,7 +6,7 @@ include('adm_header.php');
 
 $file = __DIR__.'/install.php';
 if(file_exists($file)) {
-  die('<div class="w3-center"><h2>Bitte zuerst die Datei <span class="w3-tag w3-blue">install.php</span> löschen!</h2><p>... weiter zu <a href="index.php">MiFritz!CTI</a> ...</p></div>');
+  die('<div class="w3-center"><h2>Bitte zuerst die Datei <span class="w3-tag w3-blue">install.php</span> löschen!</h2><p>... weiter zu <a href="index.php"><b>Callora<span style="color:#b3b2b2;">C</span><span style="color:#878786;">T</span><span style="color:#23b0e6;">I</span></b></a> ...</p></div>');
 }
 
   if (isset($_POST['submit'])) {
