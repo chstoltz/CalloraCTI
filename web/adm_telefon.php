@@ -11,7 +11,7 @@ include('adm_menu.php');
 if (isset($_POST['submitphone'])) {
   extract($_POST, EXTR_OVERWRITE);
   $screenname = db_cell('username','adm_benutzer',$nst);
-  mysqli_query($db_conn,"INSERT INTO usr_telefon(screenname,username,displayname,authname,password,proxy,registrar,nst,mac,model,exp) VALUES ('$screenname','$username','$nst','$authname','$password','$proxy_ip','$registrar_ip','$nst','$mac','$model','$exp')");
+  mysqli_query($db_conn,"INSERT INTO usr_telefon(screenname,username,displayname,authname,password,proxy,registrar,nst,mac,model,exp) VALUES ('$screenname','$username','$nst','$authname','$password','$proxy','$registrar','$nst','$mac','$model','$exp')");
   provision($nst);
   sipnotify($nst);
 }
@@ -31,7 +31,7 @@ if (isset($_GET['prov'])) {
 if (isset($_POST['submitedit'])) {
   extract($_POST, EXTR_OVERWRITE);
   $displayname = $_POST['submitedit'];
-  mysqli_query($db_conn,"UPDATE usr_telefon SET username='$username',authname='$authname',password='$password',proxy='$proxy_ip',registrar='$registrar_ip',model='$model',mac='$mac',exp='$exp' WHERE displayname = '$displayname'");
+  mysqli_query($db_conn,"UPDATE usr_telefon SET username='$username',authname='$authname',password='$password',proxy='$proxy',registrar='$registrar',model='$model',mac='$mac',exp='$exp' WHERE displayname = '$displayname'");
   provision($displayname);
   sipnotify($displayname);
 }
@@ -178,13 +178,13 @@ if (isset($_POST['submitedit'])) {
     <div class="w3-bar-item" style="width:150px"><input class="w3-input w3-border" type="text" name="authname"></div>
     <div class="w3-bar-item" style="width:150px"><input class="w3-input w3-border" type="password" name="password"></div>
     <div class="w3-bar-item" style="width:150px">
-      <select class="w3-select w3-padding" name="proxy_ip">
+      <select class="w3-select w3-padding" name="proxy">
         <option value="<?php echo $cfg['fb']['ip']; ?>">[IP] <?php echo $cfg['fb']['ip']; ?></option>
         <option value="<?php echo $cfg['fb']['host']; ?>">[FQDN] <?php echo $cfg['fb']['host']; ?></option>
       </select>
     </div>
     <div class="w3-bar-item" style="width:150px">
-      <select class="w3-select w3-padding" name="registrar_ip">
+      <select class="w3-select w3-padding" name="registrar">
         <option value="<?php echo $cfg['fb']['ip']; ?>">[IP] <?php echo $cfg['fb']['ip']; ?></option>
         <option value="<?php echo $cfg['fb']['host']; ?>">[FQDN] <?php echo $cfg['fb']['host']; ?></option>
       </select>
