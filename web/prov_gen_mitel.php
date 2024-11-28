@@ -171,7 +171,7 @@ if(mysqli_num_rows($query) != 0) {
   while($row = mysqli_fetch_array($query)) {
     if (str_starts_with($row['taste'], 'exp')) {
       $key = $row['taste'];
-      $key = 'expmod1 key'.substr($key, -1);
+      $key = 'expmod1 key'.substr($key, 6);
     } else {
       $key = $row['taste'];
     }
