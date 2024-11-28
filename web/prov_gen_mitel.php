@@ -156,7 +156,7 @@ if(mysqli_num_rows($query) != 0) {
   $config .= "action uri incoming: $protocol://{$cfg['cnf']['fqdn']}/web/xml_incoming.php?nst=\$\$DISPLAYNAME\$\$&vendor=mitel&remotenumber=\$\$REMOTENUMBER\$\$\n";
   $config .= "action uri connected: $protocol://{$cfg['cnf']['fqdn']}/web/xml_connected.php?nst=\$\$DISPLAYNAME\$\$&vendor=mitel&remotenumber=\$\$REMOTENUMBER\$\$\n";
   $config .= "action uri disconnected: $protocol://{$cfg['cnf']['fqdn']}/web/xml_disconnected.php?nst=\$\$DISPLAYNAME\$\$&vendor=mitel\n";
-  $config .= "action uri registered: $protocol://{$cfg['cnf']['fqdn']}/web/xml_mitel.php?nst=\$\$DISPLAYNAME\$\$&action=registered&ip=\$\$LOCALIP\$\$&linestate=\$\$LINESTATE\$\$\n";
+  //$config .= "action uri registered: $protocol://{$cfg['cnf']['fqdn']}/web/xml_mitel.php?nst=\$\$DISPLAYNAME\$\$&action=registered&ip=\$\$LOCALIP\$\$&linestate=\$\$LINESTATE\$\$\n";
   $config .= "action uri outgoing: $protocol://{$cfg['cnf']['fqdn']}/web/xml_outgoing.php?nst=\$\$DISPLAYNAME\$\$&vendor=mitel&remotenumber=\$\$REMOTENUMBER\$\$\n";
   $config .= "action uri registration event: $protocol://{$cfg['cnf']['fqdn']}/web/xml_mitel.php?nst=\$\$DISPLAYNAME\$\$&action=regevent&regstate=\$\$REGISTRATIONSTATE\$\$&regcode=\$\$REGISTRATIONCODE\$\$&ip=\$\$LOCALIP\$\$\n";
   $config .= "action uri offhook: $protocol://{$cfg['cnf']['fqdn']}/web/xml_offhook.php?nst=\$\$DISPLAYNAME\$\$&vendor=mitel\n";
