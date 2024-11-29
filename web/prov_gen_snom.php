@@ -47,7 +47,7 @@ if(isset($_GET['nst'])) {
   $phoneSettings->addChild('was_never_registered', 'off')->addAttribute('perm', '');
   $phoneSettings->addChild('replacement_plan_url', 'xml')->addAttribute('perm', '');
   $phoneSettings->addChild("action_setup_url", "$protocol://{$cfg['cnf']['fqdn']}/web/xml_startup.php?vendor=snom")->addAttribute('perm', '');
-  $phoneSettings->addChild("action_log_on_url", "$protocol://{$cfg['cnf']['fqdn']}/web/xmlsnom.php?nst=\$user_uid[1]&amp;action=regevent&amp;regstate=REGISTERED&amp;regcode=200&amp;ip=\$local_ip")->addAttribute('perm', '');
+  $phoneSettings->addChild("action_log_on_url", "$protocol://{$cfg['cnf']['fqdn']}/web/xml_snom.php?nst=\$user_uid[1]&amp;action=regevent&amp;regstate=REGISTERED&amp;regcode=200&amp;ip=\$local_ip")->addAttribute('perm', '');
   $phoneSettings->addChild("action_incoming_url", "$protocol://{$cfg['cnf']['fqdn']}/web/xml_incoming.php?nst=\$user_uid[1]&amp;vendor=snom&amp;remotenumber=\$remote")->addAttribute('perm', '');
   $phoneSettings->addChild("action_outgoing_url", "$protocol://{$cfg['cnf']['fqdn']}/web/xml_outgoing.php?nst=\$user_uid[1]&amp;vendor=snom&amp;remotenumber=\$remote")->addAttribute('perm', '');
   $phoneSettings->addChild("action_onhook_url", "$protocol://{$cfg['cnf']['fqdn']}/web/xml_onhook.php?nst=\$user_uid[1]&amp;vendor=snom")->addAttribute('perm', '');
