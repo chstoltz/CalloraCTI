@@ -10,7 +10,12 @@
   <a href="adm_benutzer.php" class="w3-bar-item w3-button w3-padding-large"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Benutzer</a>
   <a href="adm_telefon_einstellungen.php" class="w3-bar-item w3-button w3-padding-large"><i class="fa-solid fa-server"></i>&nbsp;&nbsp;Telefoneinstellungen</a>
   <a href="adm_telefon.php" class="w3-bar-item w3-button w3-padding-large"><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;Telefone</a>
-  <a href="adm_sipdect.php" class="w3-bar-item w3-button w3-padding-large"><i class="fa-solid fa-tower-cell"></i>&nbsp;&nbsp;SIP-DECT</a>
+  <?php if($cfg['cnf']['dectsystem'] == 'mitel') {
+    echo '<a href="adm_sipdect.php" class="w3-bar-item w3-button w3-padding-large"><i class="fa-solid fa-tower-cell"></i>&nbsp;&nbsp;SIP-DECT</a>';
+  } else {
+    echo '<a href="adm_gigaset.php" class="w3-bar-item w3-button w3-padding-large"><i class="fa-solid fa-tower-cell"></i>&nbsp;&nbsp;Gigaset Pro DECT</a>';
+  }
+  ?>
   <a href="adm_mobilteil.php" class="w3-bar-item w3-button w3-padding-large"><i class="fa-solid fa-mobile-retro"></i>&nbsp;&nbsp;Mobilteile</a>
   <a href="adm_tuerklingel.php" class="w3-bar-item w3-button w3-padding-large"><i class="fa-solid fa-door-open"></i>&nbsp;&nbsp;Türklingel</a>
 </div>

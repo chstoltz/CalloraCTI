@@ -25,6 +25,15 @@ $array = mysqli_fetch_array($query);
 $protocol = $array['protocol'];
 $$protocol = 'selected';
 
+if(isset($_POST['dectsystem_set'])) {
+  $dectsystem = $_POST['dectsystem'];
+  mysqli_query($db_conn,"UPDATE adm_einstellungen SET dectsystem='$dectsystem' WHERE id = '0'");
+  $feedback = 'Dect System gespeichert.';
+}
+
+$dectsystem = 'dect_'.$array['dectsystem'];
+$$dectsystem = 'selected';
+
 $size = 0;
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::LEAVES_ONLY);
 foreach ($files as $file) {
@@ -38,7 +47,7 @@ foreach ($files as $file) {
   <div class="w3-bar-item w3-padding-large">Einstellungen</div>
 </div>
 <div class="w3-container">
-  <p>Größe TEMP Verzeichnis: <?php echo round($size/1024/1024, 2); ?> MB<br />
+  <p>Größe TEMP Verzeichnis: <?php echo round($size/1024/1024, 2); ?> MB</p>
   <form action="adm_einstellungen.php" method="post">
     <p><input type="hidden" name="deletecache" />
     <button class="w3-btn w3-blue" type="submit">TEMP leeren</button></p>
@@ -53,7 +62,20 @@ foreach ($files as $file) {
     </select>
     <p><input type="hidden" name="protocol_set" />
     <button class="w3-btn w3-blue" type="submit">Speichern</button></p>
-    Nach dem Wechsel des Protokolls, müssen alle Telefone neu provisioniert und neu gestartet werden.
+  </form>
+  Nach dem Wechsel des Protokolls, müssen alle Telefone neu provisioniert und neu gestartet werden.
+</div>
+<div class="w3-container">
+  <form action="adm_einstellungen.php" method="post">
+    <p><label>DECT System:</label><br />
+    <select class="w3-select w3-padding" name="dectsystem" style="width:200px">
+      <option value="mitel" <?php echo @$dect_mitel; ?>>Mitel SIP-DECT</option>
+      <option value="gigaset" <?php echo @$dect_gigaset; ?>>Gigaset Pro</option>
+    </select>
+    <p><input type="hidden" name="dectsystem_set" />
+    <button class="w3-btn w3-blue" type="submit">Speichern</button></p>
+  </form>
+</div>
 <?php
   include('footer.php');
 ?>
