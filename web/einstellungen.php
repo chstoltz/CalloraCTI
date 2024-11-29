@@ -261,7 +261,7 @@ if((isset($exp_module)) AND ($exp_module != 0)) {
             <div class="w3-row w3-third">';
   }
   for ($e=1; $e<=$expkeys; $e++) {
-    $equery = mysqli_query($db_conn,"SELECT * FROM tasten WHERE nst='$nst' AND taste='expkey$e'");
+    $equery = mysqli_query($db_conn,"SELECT * FROM tasten WHERE nst='$nst' AND taste='expmod1 key$e'");
     if(mysqli_num_rows($equery) == 1) {
       $earray = mysqli_fetch_array($equery);
       $type = $earray['type'];
@@ -292,7 +292,7 @@ if((isset($exp_module)) AND ($exp_module != 0)) {
             <input class="w3-input w3-border" type="text" name="label" value="'.@$label.'" style="width:300px">
 	          <label>Inhalt:</label>
             <input class="w3-input w3-border" type="text" name="value" value="'.@$value.'" style="width:300px">
-  	        <input type="hidden" name="key" value="expkey'.$e.'">
+  	        <input type="hidden" name="key" value="expmod1 key'.$e.'">
             <input type="hidden" name="keytype" value="expkeys">
 	          <input type="hidden" name="settings" value="keys">
 	          <button class="w3-btn w3-blue" type="submit">Speichern</button>
