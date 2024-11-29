@@ -70,7 +70,7 @@ $config .= '</xmlAppl>';
 $config .= '</SetXMLApplication>';
 $config .= '<SetXMLApplication plainText="1" replaceData="1">';
 $config .= '<xmlAppl enable="1" id="6" name="callCompletion" type="BuiltIn" >';
-$config .= '<url protocol="HTTP" host="'.$cfg['cnf']['fqdn'].'" path="/xml_sipdect.php?nummer={number}&na={subsc}&pp={ppn}&src={sipsrc}&dest={sipdest}" username="" password="" />';
+$config .= '<url protocol="HTTP" host="'.$cfg['cnf']['fqdn'].'" path="web/xml_sipdect.php?nummer={number}&na={subsc}&pp={ppn}&src={sipsrc}&dest={sipdest}" username="" password="" />';
 $config .= '</xmlAppl>';
 $config .= '</SetXMLApplication>';
 $config .= '<SetXMLApplication plainText="1" replaceData="1">';
