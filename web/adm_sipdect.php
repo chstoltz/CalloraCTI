@@ -176,6 +176,7 @@ if(isset($_POST['submitedit'])) {
         <div class="w3-bar-item" style="width:100px"><?php echo $att->minPPSwVersion2; ?></div>
         <div class="w3-bar-item" style="width:100px"><?php echo $att->minPPSwVersion3; ?></div>
         <div class="w3-bar-item" style="width:100px"><?php echo $att->minPPSwVersion4; ?></div>
+        <div class="w3-bar-item" style="width:200px"><a href="<?php echo $cfg['cnf']['protocol'].'://'.@$omm_ip; ?>" target="_new">OMM Web Service</a></div>
       </li>
     </ul>
     <h5>RFP Daten:</h5>

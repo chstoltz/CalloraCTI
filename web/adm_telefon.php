@@ -51,6 +51,7 @@ if (isset($_POST['submitedit'])) {
     <div class="w3-bar-item" style="width:100px">Modell</div>
     <div class="w3-bar-item" style="width:150px">Tastenmodul</div>
     <div class="w3-bar-item" style="width:150px">Firmware</div>
+    <div class="w3-bar-item" style="width:150px">IP Adresse</div>
     <div class="w3-bar-item" style="width:200px">MAC</div>
   </li>
 <?php
@@ -60,6 +61,8 @@ if (isset($_POST['submitedit'])) {
   $query = mysqli_query($db_conn,"SELECT * FROM usr_telefon");
   while ($row = mysqli_fetch_array($query)) {
     extract($row, EXTR_OVERWRITE);
+    $ipQuery = mysqli_query($db_conn,"SELECT ip FROM regevent WHERE nst = '$nst'");
+    $ipArray = mysqli_fetch_array($ipQuery);
     if($nst == @$edit_nst) {
       if(filter_var($registrar, FILTER_VALIDATE_IP)==TRUE) {
         $r_check_ip = 'selected';
@@ -115,6 +118,7 @@ if (isset($_POST['submitedit'])) {
           echo '</select>
               </div>
               <div class="w3-bar-item" style="width:150px">'.$firmware.'</div>
+              <div class="w3-bar-item" style="width:150px">'.$ipArray['ip'].'</div>
               <div class="w3-bar-item" style="width:200px"><input class="w3-input w3-border" type="text" name="mac" value="'.$mac.'"></div>
               <div class="w3-bar-item" style="width:50px">
                 <input type="hidden" name="submitedit" value="'.$nst.'" />
@@ -146,6 +150,7 @@ if (isset($_POST['submitedit'])) {
               <div class="w3-bar-item" style="width:100px">'.$model.'</div>
               <div class="w3-bar-item" style="width:150px">'.$expm.'</div>
               <div class="w3-bar-item" style="width:150px">'.$firmware.'</div>
+              <div class="w3-bar-item" style="width:150px"><a href="'.$cfg['cnf']['protocol'].'://'.$ipArray['ip'].'" target="_new">'.$ipArray['ip'].'</a></div>
               <div class="w3-bar-item" style="width:200px">'.$mac.'</div>
               <div class="w3-bar-item" style="width:50px"><a href="adm_telefon.php?edit='.$nst.'"><i class="fa-solid fa-pen" title="Editieren"></i></a></div>
               <div class="w3-bar-item" style="width:50px"><a href="adm_telefon.php?prov='.$nst.'"><i class="fa-solid fa-rotate" title="Provisionierung auslösen"></i></a></div>
