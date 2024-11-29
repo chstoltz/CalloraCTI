@@ -37,6 +37,8 @@ if(mysqli_num_rows($query)==1) {
   $cfg['cnf']['path'] = $array['ws_path'];
   $cfg['cnf']['cell_prefix'] = $array['cell_prefix'];
   $cfg['cnf']['polling'] = $array['polling'];
+  $cfg['cnf']['dectsystem'] = $array['dectsystem'];
+  $cfg['cnf']['protocol'] = $array['protocol'];
   
 }
 
