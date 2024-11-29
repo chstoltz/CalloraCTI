@@ -54,8 +54,10 @@ while($row = mysqli_fetch_array($search_keys)) {
     case 'mitel':
       $xml='<AastraIPPhoneExecute><ExecuteItem URI="Led: '.$row['taste'].'=fastflash:yellow"/></AastraIPPhoneExecute>';
       push2phone($cfg['cnf']['ip'],phone_ip($ziel),$xml);
-      $xml='<AastraIPPhoneConfiguration setType="remote"><ConfigurationItem><Parameter>'.$row['taste'].' label</Parameter><Value>'.$remotenumber.'</Value></ConfigurationItem></AastraIPPhoneConfiguration>';
-      push2phone($cfg['cnf']['ip'],phone_ip($ziel),$xml);
+      if(!str_starts_with($row['taste'], 'exp')) {
+        $xml='<AastraIPPhoneConfiguration setType="remote"><ConfigurationItem><Parameter>'.$row['taste'].' label</Parameter><Value>'.$remotenumber.'</Value></ConfigurationItem></AastraIPPhoneConfiguration>';
+        push2phone($cfg['cnf']['ip'],phone_ip($ziel),$xml);
+      }
       break;
     case 'yealink':
       $key = $row['taste'];
