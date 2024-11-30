@@ -271,8 +271,17 @@ if (isset($_POST['submitedit'])) {
             $user_nst = $item->{'X_AVM-DE_InternalNumber'};
             $query = mysqli_query($db_conn,"SELECT * FROM adm_benutzer WHERE nst='$user_nst'");
             if(mysqli_num_rows($query)==0) {
-                echo '<option value="'.$user_nst.'">'.$user_nst.'</option>';
-                $sum_nst++;
+              echo '<option value="'.$user_nst.'">'.$user_nst.'</option>';
+              $sum_nst++;
+            }
+          }
+          $list = explode(',', $x_contact->GetDECTHandsetList());
+          foreach($list as $item) {
+            $user_nst = $item+609;
+            $query = mysqli_query($db_conn,"SELECT * FROM adm_benutzer WHERE nst='$user_nst'");
+            if(mysqli_num_rows($query)==0) {
+              echo '<option value="'.$user_nst.'">'.$user_nst.'</option>';
+              $sum_nst++;
             }
           }
         ?>

@@ -165,7 +165,7 @@ if (isset($_POST['submitedit'])) {
 <form method="post" action="adm_telefon.php">
   <li class="w3-bar">
     <?php
-      $userquery = mysqli_query($db_conn,"SELECT adm_benutzer.username,adm_benutzer.nst FROM adm_benutzer LEFT JOIN usr_telefon ON adm_benutzer.nst = usr_telefon.nst WHERE usr_telefon.nst IS NULL AND adm_benutzer.username != 'admin'");
+      $userquery = mysqli_query($db_conn,"SELECT adm_benutzer.username,adm_benutzer.nst FROM adm_benutzer LEFT JOIN usr_telefon ON adm_benutzer.nst = usr_telefon.nst WHERE usr_telefon.nst IS NULL AND adm_benutzer.nst >= '620' AND adm_benutzer.username != 'admin'");
       if(mysqli_num_rows($userquery) >= 1) {
     ?>
     <div class="w3-bar-item" style="width:150px">
