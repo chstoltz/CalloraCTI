@@ -40,7 +40,8 @@ CREATE TABLE `adm_einstellungen` (
   `options_password_enabled` tinyint(1) NOT NULL DEFAULT 0,
   `codecs` varchar(255) DEFAULT NULL,
   `protocol` varchar(5) NOT NULL DEFAULT 'http',
-  `dectsystem` varchar(20) NOT NULL DEFAULT 'mitel'
+  `dectsystem` varchar(20) NOT NULL DEFAULT 'mitel',
+  `db_version` smallint(6) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `adm_fritzbox` (
@@ -261,7 +262,7 @@ ALTER TABLE `usr_tuerklingel`
 
 
 ALTER TABLE `adm_benutzer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 ALTER TABLE `tasten`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
