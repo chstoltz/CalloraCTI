@@ -219,6 +219,8 @@ $xmlcontext = stream_context_create(
 );
 libxml_set_streams_context($xmlcontext);
 
+if($cfg['cnf']['protocol'] == 'https') {
+
 $x_contact = new SoapClient(
   null,
   array(
@@ -323,5 +325,75 @@ $x_dect = new SoapClient(
     ]),
   )
 );
+
+} else {
+
+  $x_contact = new SoapClient(
+    null,
+    array(
+      'location' => "http://{$cfg['fb']['host']}:49000/upnp/control/x_contact",
+      'uri'      => "urn:dslforum-org:service:X_AVM-DE_OnTel:1",
+      'noroot'   => False,
+      'login'    => $cfg['fb']['user'],
+      'password' => $cfg['fb']['pass']
+    )
+  );
+    
+  $x_tam = new SoapClient(
+    null,
+    array(
+      'location' => "http://{$cfg['fb']['host']}:49000/upnp/control/x_tam",
+      'uri'      => "urn:dslforum-org:service:X_AVM-DE_TAM:1",
+      'noroot'   => False,
+      'login'    => $cfg['fb']['user'],
+      'password' => $cfg['fb']['pass']
+    )
+  );
+  
+  $x_voip = new SoapClient(
+    null,
+    array(
+      'location' => "http://{$cfg['fb']['host']}:49000/upnp/control/x_voip",
+      'uri'      => "urn:dslforum-org:service:X_VoIP:1",
+      'noroot'   => TRUE,
+      'login'    => $cfg['fb']['user'],
+      'password' => $cfg['fb']['pass']
+    )
+  );
+    
+  $deviceconfig = new SoapClient(
+    null,
+    array(
+      'location' => "http://{$cfg['fb']['host']}:49000/upnp/control/deviceconfig",
+      'uri'      => "urn:dslforum-org:service:DeviceConfig:1",
+      'noroot'   => False,
+      'login'    => $cfg['fb']['user'],
+      'password' => $cfg['fb']['pass']
+    )
+  );
+  
+  $x_auth = new SoapClient(
+    null,
+    array(
+      'location' => "http://{$cfg['fb']['host']}:49000/upnp/control/x_auth",
+      'uri'      => "urn:dslforum-org:service:X_AVM-DE_Auth:1",
+      'noroot'   => False,
+      'login'    => $cfg['fb']['user'],
+      'password' => $cfg['fb']['pass']
+    )
+  );
+  
+  $x_dect = new SoapClient(
+    null,
+    array(
+      'location' => "http://{$cfg['fb']['host']}:49000/upnp/control/x_dect",
+      'uri'      => "urn:dslforum-org:service:X_AVM-DE_Dect:1",
+      'noroot'   => False,
+      'login'    => $cfg['fb']['user'],
+      'password' => $cfg['fb']['pass']
+    )
+  );
+
+}
 
 ?>
