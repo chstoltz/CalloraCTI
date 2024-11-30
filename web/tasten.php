@@ -14,18 +14,21 @@
   $taste = $taste_art.$taste_nr;
 
   $query = mysqli_query($db_conn,"SELECT * FROM tasten WHERE nst = '$nst' AND taste='$taste'");
-  $array = mysqli_fetch_array($query);
+  if(mysqli_num_rows($query)==1) {
+    $array = mysqli_fetch_array($query);
 
-  $type = 'key_'.$array['type'];
-  $$type = 'selected';
-  $label = $array['label'];
-  $ziel = $array['ziel'];
-  $keyid = $array['id'];
+    $type = 'key_'.$array['type'];
+    $$type = 'selected';
+    $label = $array['label'];
+    $ziel = $array['ziel'];
+    $keyid = $array['id'];
+  }
   if(str_starts_with($taste_art, 'exp')) {
     $keytype = 'expkeys';
   } else {
     $keytype = $taste_art.'s';
   }
+  
 
   
 ?>
@@ -41,7 +44,7 @@ function showKey(str) {
         document.getElementById("keyHint").innerHTML = this.responseText;
       }
     };
-    xmlhttp.open("GET","tastentyp.php?nst=<?php echo $nst; ?>&ziel=<?php echo $ziel; ?>&label=<?php echo $label; ?>&q="+str,true);
+    xmlhttp.open("GET","tastentyp.php?nst=<?php echo @$nst; ?>&ziel=<?php echo @$ziel; ?>&label=<?php echo @$label; ?>&q="+str,true);
     xmlhttp.send();
   }
 }
