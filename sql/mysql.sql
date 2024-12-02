@@ -76,6 +76,11 @@ CREATE TABLE `callstate` (
   `remotenumber` varchar(16) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE `cticlient` (
+  `nst` smallint(3) NOT NULL,
+  `ip` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 CREATE TABLE `model` (
   `model` varchar(10) NOT NULL,
   `hersteller` varchar(20) DEFAULT NULL,
