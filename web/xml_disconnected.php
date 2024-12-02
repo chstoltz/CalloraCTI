@@ -36,6 +36,15 @@ if($rowcount = mysqli_num_rows($callstate) == 0) {
 } else {
   mysqli_query($db_conn,"UPDATE callstate SET state='disconnected',remotenumber='0' WHERE nst = '$nst'");
 }
+$query = mysqli_query($db_conn,"SELECT * FROM cticlient WHERE nst = '$nst'");
+if(mysqli_num_rows($query)==1) {
+  $array = mysqli_fetch_array($query);
+  $ip = $array['ip'];
+  $command = 'first color green';
+  cticlient($ip,$command);
+  $command = 'first number L1';
+  cticlient($ip,$command);
+}
 $search_keys = mysqli_query($db_conn,"SELECT * FROM tasten WHERE ziel='$nst'");
 while($row = mysqli_fetch_array($search_keys)) {
   $ziel = $row['nst'];
@@ -68,6 +77,15 @@ while($row = mysqli_fetch_array($search_keys)) {
       $url = $protocol.'://admin:'.$admin_password_phone.'@'.phone_ip($ziel).'/minibrowser.htm?url='.$protocol.'://'.$cfg['cnf']['fqdn'].'%2Fweb%2Fsnom_remote.php%3Fled%3D'.$keyno.'%26value%3DOff';
       file_get_contents($url);
       break;
+  }
+  $query = mysqli_query($db_conn,"SELECT * FROM cticlient WHERE nst = '$ziel'");
+  if(mysqli_num_rows($query)==1) {
+    $array = mysqli_fetch_array($query);
+    $ip = $array['ip'];
+    $command = $nst. ' color green';
+    cticlient($ip,$command);
+    $command = $nst. ' number '.$label;
+    cticlient($ip,$command);
   }
 }
 echo $endecho;

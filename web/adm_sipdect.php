@@ -30,10 +30,12 @@ if(isset($_POST['reboot'])) {
   $feedback = 'OMM erfolgreich neu gestartet!';
 }
 if(isset($_POST['check'])) {
+  exec("php {$cfg['cnf']['path']}.'/web/prov_gen_sipdect.php & > /dev/null 2>&1");
   exec("php {$cfg['cnf']['path']}.'/web/omm_check_sync.php & > /dev/null 2>&1");
   $feedback = 'Benutzerdaten werden neu provisioniert!';
 }
 if(isset($_POST['prov'])) {
+  exec("php {$cfg['cnf']['path']}.'/web/prov_gen_sipdect.php & > /dev/null 2>&1");
   exec("php {$cfg['cnf']['path']}.'/web/omm_prov_sync.php' & > /dev/null 2>&1");
   $feedback = 'OMM wird neu provisioniert!';
 }

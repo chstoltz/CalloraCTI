@@ -209,6 +209,17 @@ function deleteCache($dir, $extensions = ['.tmp', '.wav']) {
   }
 }
 
+function cticlient($ip,$command) {
+  
+  $s = fsockopen($ip, 22222, $errno, $errstr, 10);
+  if (!$s) {
+      echo "Verbindung fehlgeschlagen: $errstr ($errno)\n";
+  } else {
+    fwrite($s, $command."\n");
+    fclose($s);
+  }
+}
+
 //=====================================================================//
 
 $xmlcontext = stream_context_create(

@@ -77,7 +77,19 @@ if($pa6 == 1) {
   while($row = mysqli_fetch_array($search_keys)) {
     $xml='<AastraIPPhoneExecute><ExecuteItem URI="Led: '.$row['taste'].'=off:green"/></AastraIPPhoneExecute>';
     $ziel = $row['nst'];
+    $label = $row['label'];
     push2phone($server,phone_ip($ziel),$xml);
+    $xml='<AastraIPPhoneConfiguration setType="remote"><ConfigurationItem><Parameter>'.$row['taste'].' label</Parameter><Value>'.$label.'</Value></ConfigurationItem></AastraIPPhoneConfiguration>';
+    push2phone($cfg['cnf']['ip'],phone_ip($ziel),$xml);
+    $query = mysqli_query($db_conn,"SELECT * FROM cticlient WHERE nst = '$ziel'");
+    if(mysqli_num_rows($query)==1) {
+      $array = mysqli_fetch_array($query);
+      $ip = $array['ip'];
+      $command = $nst. ' color green';
+      cticlient($ip,$command);
+      $command = $nst. ' number '.$label;
+      cticlient($ip,$command);
+    }
   }
   echo '<AastraIPPhoneExecute><ExecuteItem URI=""/></AastraIPPhoneExecute>';
 }
@@ -94,8 +106,16 @@ if($pa7 == 1) {
     $xml='<AastraIPPhoneExecute><ExecuteItem URI="Led: '.$row['taste'].'=on:red"/></AastraIPPhoneExecute>';
     $ziel = $row['nst'];
     push2phone($server,phone_ip($ziel),$xml);
-}
-echo '<AastraIPPhoneExecute><ExecuteItem URI=""/></AastraIPPhoneExecute>';
+
+    $query = mysqli_query($db_conn,"SELECT * FROM cticlient WHERE nst = '$ziel'");
+    if(mysqli_num_rows($query)==1) {
+      $array = mysqli_fetch_array($query);
+      $ip = $array['ip'];
+      $command = $nst. ' color red';
+      cticlient($ip,$command);
+    }
+  }
+  echo '<AastraIPPhoneExecute><ExecuteItem URI=""/></AastraIPPhoneExecute>';
 }
 // eingehend
 if($pa8 == 1) {
@@ -110,6 +130,14 @@ if($pa8 == 1) {
     $xml='<AastraIPPhoneExecute><ExecuteItem URI="Led: '.$row['taste'].'=fastflash:yellow"/></AastraIPPhoneExecute>';
     $ziel = $row['nst'];
     push2phone($server,phone_ip($ziel),$xml);
+
+    $query = mysqli_query($db_conn,"SELECT * FROM cticlient WHERE nst = '$ziel'");
+    if(mysqli_num_rows($query)==1) {
+      $array = mysqli_fetch_array($query);
+      $ip = $array['ip'];
+      $command = $nst. ' color yellow';
+      cticlient($ip,$command);
+  }
   }
 }
 // ausgehend
@@ -125,6 +153,14 @@ if($pa9 == 1) {
     $xml='<AastraIPPhoneExecute><ExecuteItem URI="Led: '.$row['taste'].'=on:red"/></AastraIPPhoneExecute>';
     $ziel = $row['nst'];
     push2phone($server,phone_ip($ziel),$xml);
+
+    $query = mysqli_query($db_conn,"SELECT * FROM cticlient WHERE nst = '$ziel'");
+    if(mysqli_num_rows($query)==1) {
+      $array = mysqli_fetch_array($query);
+      $ip = $array['ip'];
+      $command = $nst. ' color red';
+      cticlient($ip,$command);
+    }
   }
   echo '<AastraIPPhoneExecute><ExecuteItem URI=""/></AastraIPPhoneExecute>';
 }
@@ -157,6 +193,14 @@ if($pa13 == 1) {
     $xml='<AastraIPPhoneExecute><ExecuteItem URI="Led: '.$row['taste'].'=off:green"/></AastraIPPhoneExecute>';
     $ziel = $row['nst'];
     push2phone($server,phone_ip($ziel),$xml);
+
+    $query = mysqli_query($db_conn,"SELECT * FROM cticlient WHERE nst = '$ziel'");
+    if(mysqli_num_rows($query)==1) {
+      $array = mysqli_fetch_array($query);
+      $ip = $array['ip'];
+      $command = $nst. ' color red';
+      cticlient($ip,$command);
+    }
   }
   echo '<AastraIPPhoneExecute><ExecuteItem URI=""/></AastraIPPhoneExecute>';
 }
