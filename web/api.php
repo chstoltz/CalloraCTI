@@ -7,48 +7,53 @@ if(isset($_GET['nst'])) {
     
   $nst = $_GET['nst'];
   $ip = $_SERVER['REMOTE_ADDR'];
+  $query = mysqli_query($db_conn,"SELECT model.hersteller FROM usr_telefon JOIN model WHERE usr_telefon.model = model.model AND usr_telefon.displayname = '$nst'");
+  $array = mysqli_fetch_array($query);
+  $hersteller = $array['hersteller'];
+
   if(isset($_GET['action'])) {
     $action = $_GET['action'];
     if($action == 'first') {
       $status = db_cell('state','callstate',$nst);
       switch($status) {
         case 'incoming':
-          $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Key:Headset"/></AastraIPPhoneExecute>';
+          $url = "http://{$cfg['cnf']['fqdn']}/web/answer.php?nst=$nst";
           break;
         case 'outgoing':
-          $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Key:Goodbye"/></AastraIPPhoneExecute>';
+          $url = "http://{$cfg['cnf']['fqdn']}/web/hangup.php?nst=$nst";
           break;
         case 'connected':
-          $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Key:Goodbye"/></AastraIPPhoneExecute>';
+          $url = "http://{$cfg['cnf']['fqdn']}/web/hangup.php?nst=$nst";
           break;
         case 'offhook':
-          $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Key:Goodbye"/></AastraIPPhoneExecute>';
+          $url = "http://{$cfg['cnf']['fqdn']}/web/hangup.php?nst=$nst";
           break; 
         default:
           break;         
       }
-      push2phone($cfg['cnf']['ip'],phone_ip($nst),$xml);
     } else {
       $query = mysqli_query($db_conn,"SELECT * FROM callstate WHERE nst='$action'");
       $array = mysqli_fetch_array($query);
       $state = $array['state'];
       switch($state) {
         case 'IDLE':
-          $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Dial:**'.$action.'"/></AastraIPPhoneExecute>';
+          $url = "http://{$cfg['cnf']['fqdn']}/web/call.php?nst=$nst&number=$action";
           break;
         case 'disconnected':
-          $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Dial:**'.$action.'"/></AastraIPPhoneExecute>';
+          $url = "http://{$cfg['cnf']['fqdn']}/web/call.php?nst=$nst&number=$action";
           break;
         case 'onhook':
-          $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Dial:**'.$action.'"/></AastraIPPhoneExecute>';
+          $url = "http://{$cfg['cnf']['fqdn']}/web/call.php?nst=$nst&number=$action";
           break;
         case 'incoming':
-          $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Dial:*09"/></AastraIPPhoneExecute>';
+          $url = "http://{$cfg['cnf']['fqdn']}/web/pickup.php?nst=$nst";
           break;
         default:
           break;
       }
-      push2phone($cfg['cnf']['ip'],phone_ip($nst),$xml);
+    }
+    if($isset($urls)) {
+      file_get_contents($url);
     }
   } else {
     $query = mysqli_query($db_conn,"SELECT * FROM cticlient WHERE nst = '$nst'");
