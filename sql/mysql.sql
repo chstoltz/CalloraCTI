@@ -20,7 +20,7 @@ CREATE TABLE `adm_benutzer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `adm_benutzer` (`id`, `username`, `password`, `salt`, `nst`, `email`, `regdate`, `level`) VALUES
-(1, 'admin', '03920b53dcc0795010e1d5a484c5a8fcd9310c8c1a84a363ed6e196d814cda07ffc3e4d30e426bd44f5a0a84091bd07417aefa0f924c2dcd50fb3aabf8165f6c', 'b542e8824ce2203b4704d15499b77e6e29e5e55556970ec7232a665b30c74a240d05981cffae8cf9f6ea7417c16c2790f417c3e5ed6a101c06c8f447e6e52477', 0, 'deine@mail.de', '2024-11-10 11:52:32', 9);
+(1, 'admin', '03920b53dcc0795010e1d5a484c5a8fcd9310c8c1a84a363ed6e196d814cda07ffc3e4d30e426bd44f5a0a84091bd07417aefa0f924c2dcd50fb3aabf8165f6c', 'b542e8824ce2203b4704d15499b77e6e29e5e55556970ec7232a665b30c74a240d05981cffae8cf9f6ea7417c16c2790f417c3e5ed6a101c06c8f447e6e52477', 0, 'kontakt@stoltz-it.de', '2024-11-10 11:52:32', 9);
 
 CREATE TABLE `adm_einstellungen` (
   `id` tinyint(1) NOT NULL DEFAULT 0,
@@ -50,6 +50,9 @@ CREATE TABLE `adm_fritzbox` (
   `fb_user` varchar(255) NOT NULL,
   `fb_pass` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `adm_fritzbox` (`fb_url`, `fb_ip`, `fb_user`, `fb_pass`) VALUES
+('fritz.box', '192.168.178.1', 'fritz4711', 'changeme');
 
 CREATE TABLE `adm_sipdect` (
   `omm_ip` varchar(15) NOT NULL,
@@ -239,6 +242,9 @@ ALTER TABLE `callmonitor`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `callstate`
+  ADD PRIMARY KEY (`nst`);
+
+ALTER TABLE `cticlient`
   ADD PRIMARY KEY (`nst`);
 
 ALTER TABLE `model`
