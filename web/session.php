@@ -8,12 +8,12 @@
   header('Content-Type: text/html; charset=utf-8');
    
   $lifetime = 86400;
-  session_set_cookie_params($lifetime,"/; samesite=lax","$domain",TRUE,TRUE);
+  session_set_cookie_params($lifetime,"/; samesite=lax","",false,TRUE);
   session_start();
   $cookie_options = array (
     'expires' => time()+$lifetime,
     'path' => '/',
-    'domain' => $domain,
+    'domain' => '',
     'secure' => false,
     'httponly' => true,
     'samesite' => 'lax'
