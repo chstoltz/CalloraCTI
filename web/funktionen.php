@@ -220,6 +220,22 @@ function cticlient($ip,$command) {
   }
 }
 
+function addDirToZip($zip, $dir, $rootDir) {
+  $files = array_diff(scandir($dir), array('.', '..'));  // Ignoriere '.' und '..'
+  foreach ($files as $file) {
+    $filePath = $dir . '/' . $file;
+    if (is_dir($filePath)) {
+      if ($file === 'backup') {
+        continue;
+      }
+      $zip->addEmptyDir(str_replace($rootDir . '/', '', $filePath));
+      addDirToZip($zip, $filePath, $rootDir);
+    } else {
+      $zip->addFile($filePath, str_replace($rootDir . '/', '', $filePath));
+    }
+  }
+}
+
 //=====================================================================//
 
 $xmlcontext = stream_context_create(

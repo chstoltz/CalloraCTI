@@ -322,7 +322,32 @@ if(isset($_GET['action'])) {
       $result = $x_contact->GetPhoneBook(new SoapParam($fb_book, 'NewPhoneBookID'));
       $xml = simplexml_load_file($result['NewPhonebookURL']);
       if(isset($_GET['suche']) AND ($_GET['suche'] == 1)) {
-        echo '<YealinkIPPhoneTextMenu Beep="no">
+        $YealinkIPPhoneTextMenu = new SimpleXMLElement('<YealinkIPPhoneTextMenu/>');
+        $YealinkIPPhoneTextMenu->addAttribute('Beep', 'no');
+        $YealinkIPPhoneTextMenu->addChild('Title', 'Suche');
+        $YealinkIPPhoneTextMenu->addChild('Prompt', 'Namen suchen');
+        $YealinkIPPhoneTextMenu->addChild("URL", "https://{$cfg['cnf']['fqdn']}/web/xml_yealink.php?mac=$mac&amp;action=telefonbuch");
+        $YealinkIPPhoneTextMenu->addChild('Parameter', 'suche');
+        $YealinkIPPhoneTextMenu->addChild('Default', NULL);
+        $SoftKey1 = $YealinkIPPhoneTextMenu->addChild('SoftKey', NULL);
+        $SoftKey1->addAttribute('index', '1');
+        $SoftKey1->addChild('Label', 'Suchen');
+        $SoftKey1->addChild('URI', 'SoftKey:Submit');
+        $SoftKey2 = $YealinkIPPhoneTextMenu->addChild('SoftKey', NULL);
+        $SoftKey2->addAttribute('index', '2');
+        $SoftKey2->addChild('Label', NULL);
+        $SoftKey2->addChild('URI', 'SoftKey:ChangeMode');
+        $SoftKey3 = $YealinkIPPhoneTextMenu->addChild('SoftKey', NULL);
+        $SoftKey3->addAttribute('index', '3');
+        $SoftKey3->addChild('Label', 'Löschen');
+        $SoftKey3->addChild('URI', 'SoftKey:BackSpace');
+        $SoftKey4 = $YealinkIPPhoneTextMenu->addChild('SoftKey', NULL);
+        $SoftKey4->addAttribute('index', '4');
+        $SoftKey4->addChild('Label', 'Verlassen');
+        $SoftKey4->addChild('URI', 'SoftKey:Exit');
+        echo $YealinkIPPhoneTextMenu->asXML();
+        
+        /*echo '<YealinkIPPhoneTextMenu Beep="no">
               <Title>Suche</Title>
               <Prompt>Namen suchen</Prompt>
               <URL>https://'.$cfg['cnf']['fqdn'].'/web/xml_yealink.php?mac=$mac&amp;action=telefonbuch</URL>
@@ -332,7 +357,7 @@ if(isset($_GET['action'])) {
               <SoftKey index="2"><Label></Label><URI>SoftKey:ChangeMode</URI></SoftKey>
               <SoftKey index="3"><Label>Löschen</Label><URI>SoftKey:BackSpace</URI></SoftKey>
               <SoftKey index="4"><Label>Verlassen</Label><URI>SoftKey:Exit</URI></SoftKey>
-              </YealinkIPPhoneTextMenu>';
+              </YealinkIPPhoneTextMenu>';*/
         exit;
       }
       if(isset($_GET['suche'])) {

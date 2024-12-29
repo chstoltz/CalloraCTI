@@ -31,6 +31,8 @@ if(isset($_GET['nst'])) {
         default:
           break;         
       }
+    } elseif($action == 'call') {
+      $url = "http://{$cfg['cnf']['fqdn']}/web/call.php?nst=$nst&number=$number";
     } else {
       $query = mysqli_query($db_conn,"SELECT * FROM callstate WHERE nst='$action'");
       $array = mysqli_fetch_array($query);
