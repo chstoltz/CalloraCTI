@@ -21,11 +21,11 @@ $array = mysqli_fetch_array($query);
 $hersteller = $array['hersteller'];
 switch($hersteller) {
   case 'mitel':
-    $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Dial:$nummer" interruptCall="no"/></AastraIPPhoneExecute>';
+    $xml = '<AastraIPPhoneExecute><ExecuteItem URI="Dial:'.$nummer.'" interruptCall="no"/></AastraIPPhoneExecute>';
     push2phone($cfg['cnf']['ip'],phone_ip($nst),$xml);
     break;
   case 'yealink':
-    $xml = '<YealinkIPPhoneExecute><ExecuteItem URI="Dial:$nummer"/></YealinkIPPhoneExecute>';
+    $xml = '<YealinkIPPhoneExecute><ExecuteItem URI="Dial:'.$nummer.'"/></YealinkIPPhoneExecute>';
     push2phone($cfg['cnf']['ip'],phone_ip($nst),$xml);
     break;
   case 'snom':
